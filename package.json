@@ -1,0 +1,33 @@
+{
+  "name": "komikcast-scrapping",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "engines": {
+    "node": "18.15.0",
+    "npm": "9.5.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "axios-cookiejar-support": "^4.0.3",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "helmet": "^6.0.0",
+    "psl": "^1.9.0",
+    "punycode": "^2.3.0",
+    "querystringify": "^2.2.0",
+    "requires-port": "^1.0.0",
+    "tough-cookie": "^4.1.2",
+    "universalify": "^0.2.0",
+    "url-parse": "^1.5.10"
+  }
+}
