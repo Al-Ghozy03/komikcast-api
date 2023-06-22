@@ -107,7 +107,7 @@ router.get("/terbaru", async (req, res) => {
           .trim();
         komikList.push({
           title,
-          href: href?.replace(baseUrl,""),
+          href: href?.replace(`${baseUrl}/komik`, "").trim(),
           thumbnail,
           type,
           chapter,
@@ -124,8 +124,6 @@ router.get("/terbaru", async (req, res) => {
   }
   return responseApi(res, response.status, "failed");
 });
-
-
 
 router.get("/genre/:url", async (req, res) => {
   try {
@@ -251,7 +249,7 @@ router.get("/genre/:url", async (req, res) => {
             title,
             chapter,
             type,
-            href: href?.replace(baseUrl,""),
+            href: href?.replace(`${baseUrl}/komik`, "").trim(),
             rating,
             thumbnail,
           });
@@ -281,7 +279,7 @@ router.get("/genre", async (req, res) => {
       element.find("#sidebar > .section > ul.genre > li").each((i, data) => {
         const title = $(data).find("a").text().trim();
         const href = $(data).find("a").attr("href");
-        komikList.push({ title, href: href?.substring(29, href.length) });
+        komikList.push({ title, href: href?.replace(`${baseUrl}/genres`, "").trim() });
       });
       return responseApi(res, 200, "success", komikList);
     }
@@ -361,7 +359,7 @@ router.get("/search", async (req, res) => {
             type,
             chapter,
             rating,
-            href: href?.replace(baseUrl,""),
+            href: href?.replace(`${baseUrl}/komik`, "").trim(),
             thumbnail,
           });
         });
@@ -370,7 +368,7 @@ router.get("/search", async (req, res) => {
     }
     return responseApi(res, response.status, "failed");
   } catch (er) {
-    console.log("ini error",er);
+    console.log("ini error", er);
     return responseApi(res, 500, "failed");
   }
 });
@@ -438,7 +436,7 @@ router.get("/detail/:url", async (req, res) => {
           const title = $(data).find("a").text().trim();
           const href = $(data).find("a").attr("href");
           const date = $(data).find(".chapter-link-time").text().trim();
-          chapter.push({ title, href: href?.substring(30, href.length), date });
+          chapter.push({ title, href: href?.replace(`${baseUrl}/chapter`, ""), date });
         });
 
       element
@@ -448,19 +446,17 @@ router.get("/detail/:url", async (req, res) => {
         .each((i, data) => {
           genre.push({
             title: $(data).text().trim(),
-            href: $(data)
-              .attr("href")
-              ?.substring(29, $(data).attr("href").length),
+            href: $(data).attr("href")?.replace(`${baseUrl}/genres`, "").trim(),
           });
         });
 
       komikList.push({
         title,
         rating: rating.replace("Rating ", ""),
-        status: status?.substring(8, status.length),
-        type: type?.substring(6, type.length),
-        released: released?.substring(10, released.length),
-        author: author?.substring(8, author.length),
+        status: status.replace("Status:", "").trim(),
+        type: type?.replace("Type:", "").trim(),
+        released: released?.replace("Released:", "").trim(),
+        author: author?.replace("Author:", "").trim(),
         genre,
         description,
         thumbnail,
@@ -502,8 +498,8 @@ router.get("/popular", async (req, res) => {
           const href = $(data).find(".imgseries > a").attr("href");
           komikList.push({
             title,
-            href: href?.replace(baseUrl,""),
-            genre: genre?.substring(7, genre.length),
+            href: href?.replace(`${baseUrl}/komik`, "").trim(),
+            genre: genre.replace("Genres:","").trim(),
             year,
             thumbnail,
           });
@@ -553,7 +549,7 @@ router.get("/recommended", async (req, res) => {
           .attr("src");
         komikList.push({
           title,
-          href: href?.replace(baseUrl,""),
+          href: href?.replace(`${baseUrl}/komik`, ""),
           rating,
           chapter,
           type,
