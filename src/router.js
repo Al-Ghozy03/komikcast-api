@@ -279,7 +279,10 @@ router.get("/genre", async (req, res) => {
       element.find("#sidebar > .section > ul.genre > li").each((i, data) => {
         const title = $(data).find("a").text().trim();
         const href = $(data).find("a").attr("href");
-        komikList.push({ title, href: href?.replace(`${baseUrl}/genres`, "").trim() });
+        komikList.push({
+          title,
+          href: href?.replace(`${baseUrl}/genres`, "").trim(),
+        });
       });
       return responseApi(res, 200, "success", komikList);
     }
@@ -436,7 +439,11 @@ router.get("/detail/:url", async (req, res) => {
           const title = $(data).find("a").text().trim();
           const href = $(data).find("a").attr("href");
           const date = $(data).find(".chapter-link-time").text().trim();
-          chapter.push({ title, href: href?.replace(`${baseUrl}/chapter`, ""), date });
+          chapter.push({
+            title: title.trim(),
+            href: href?.replace(`${baseUrl}/chapter`, ""),
+            date,
+          });
         });
 
       element
@@ -499,7 +506,7 @@ router.get("/popular", async (req, res) => {
           komikList.push({
             title,
             href: href?.replace(`${baseUrl}/komik`, "").trim(),
-            genre: genre.replace("Genres:","").trim(),
+            genre: genre.replace("Genres:", "").trim(),
             year,
             thumbnail,
           });
