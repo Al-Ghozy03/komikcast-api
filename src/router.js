@@ -440,7 +440,7 @@ router.get("/detail/:url", async (req, res) => {
           const href = $(data).find("a").attr("href");
           const date = $(data).find(".chapter-link-time").text().trim();
           chapter.push({
-            title: title.trim(),
+            title: `Chapter ${title?.replace("Chapter","").trim()}`,
             href: href?.replace(`${baseUrl}/chapter`, ""),
             date,
           });
