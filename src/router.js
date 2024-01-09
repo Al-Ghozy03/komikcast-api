@@ -2,7 +2,7 @@ const router = require("express")();
 const cheerio = require("cheerio");
 const { AxiosService } = require("./helper/axios_service");
 const { responseApi } = require("./helper/response_api");
-const baseUrl = "https://komikcast.vip";
+const baseUrl = "https://komikcast.lol";
 
 router.get("/", (req, res) => {
   return res.status(200).json({
