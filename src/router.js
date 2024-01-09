@@ -438,10 +438,11 @@ router.get("/detail/:url", async (req, res) => {
         .each((i, data) => {
           const title = $(data).find("a").text().trim();
           const href = $(data).find("a").attr("href");
+          const href2 = $(data).find("a:nth-child(2)").attr("href");
           const date = $(data).find(".chapter-link-time").text().trim();
           chapter.push({
-            title: `Chapter ${title?.replace("Chapter","").trim()}`,
-            href: href?.replace(`${baseUrl}/chapter`, ""),
+            title: `Chapter ${title?.replace("Chapter", "").trim()}`,
+            href: href ? href?.replace(`${baseUrl}/chapter`, "") : href2.replace(`${baseUrl}/chapter`, ""),
             date,
           });
         });
